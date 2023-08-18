@@ -29,7 +29,7 @@ const Sort: React.FC<SortProps> = ({
   };
   return (
     <select
-      className="mx-4 rounded-lg p-2 cursor-pointer font-serif"
+      className="mx-4 rounded-lg p-2 focus:outline-slate-300 cursor-pointer border rw-[85%] sm:w-24"
       name="sort"
       value={sortOption}
       onChange={(e) => handleChange(e)}

@@ -6,7 +6,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import MyTasks from "./pages/MyTasks";
 import ProfilePage from "./pages/ProfilePage";
-import AddTask from "./components/AddTask";
+import AddTask from "./pages/AddTask";
 import { TaskContextProvider } from "./context/TaskContext";
 
 function App() {

@@ -25,8 +25,9 @@ export const TaskContextProvider: React.FC<TaskContextProps> = ({
       try {
         const userEmail = window.localStorage.getItem("userEmail");
         const res = await axios.get(
-          `${BACKEND_URL}/Tasks/showTasks?userEmail=${userEmail}`
+          `${BACKEND_URL}/Task/showTasks?userEmail=${userEmail}`
         );
+        console.log(res.data);
         setTaskList(res.data);
       } catch (error) {
         console.log(error);

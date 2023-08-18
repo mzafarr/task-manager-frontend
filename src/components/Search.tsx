@@ -23,9 +23,9 @@ const Search: React.FC<SearchProps> = ({
       name="search"
       placeholder="search your tasks"
       value={search}
-      className="px-2 mx-4 rounded border-lg w-2/5 border-slate-500 outline-slate-200 outline-none"
+      className="px-2 py-1.5 mx-4 rounded border-lg w-[90%] sm:w-2/5 border-slate-500 outline-slate-200 outline-none"
       onChange={(e) => {
-        setSearch((prev) => e.target.value);
+        setSearch(e.target.value);
         handleSearch();
       }}
     />
