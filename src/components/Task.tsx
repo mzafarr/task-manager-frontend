@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface TaskProps {
   task: Task;
   handleDelete: (_id: any) => void;
+  handleUpdateStatus: (title: string, newStatus: string) => void;
 }
 
-const Task: React.FC<TaskProps> = ({ task, handleDelete }) => {
+const Task: React.FC<TaskProps> = ({
+  task,
+  handleUpdateStatus,
+  handleDelete,
+}) => {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
   const [dueDate, setDueDate] = useState(task.dueDate.split("T")[0]);
   const [status, setStatus] = useState(task.status);
+
+  useEffect(() => {
+    handleUpdateStatus(title, status);
+  }, [status]);
 
   return (
     <div className="flex flex-col border p-4 m-4 rounded w-[90%] sm:w-auto">
@@ -44,7 +53,7 @@ const Task: React.FC<TaskProps> = ({ task, handleDelete }) => {
             className="mr-1"
             type="radio"
             value="in-progress"
-            checked={status === "In-Progress"}
+            checked={status === "in-progress"}
             onChange={(e) => setStatus(e.target.value)}
           />
           In-Progress

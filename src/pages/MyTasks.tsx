@@ -19,7 +19,7 @@ const MyTasks = () => {
   const { taskList, setTaskList } = context;
   const [filteredTasks, setFilteredTasks] = useState(taskList);
 
-  const handleDelete = async (title: any) => {
+  const handleDelete = async (title: string) => {
     try {
       const res = await axios.delete(
         `${BACKEND_URL}/Task/deleteTask/${title}?userEmail=${window.localStorage.getItem(
@@ -29,6 +29,26 @@ const MyTasks = () => {
       setTaskList((prevList) =>
         prevList.filter((task) => task.title !== title)
       );
+      successToast("Task successfully deleted.");
+    } catch (error) {
+      console.log(error);
+      errorToast("Something went wrong.");
+    }
+  };
+
+  const handleUpdateStatus = async (title: string, newStatus: string) => {
+    try {
+      const res = await axios.put(`${BACKEND_URL}/Task/updateStatus/${title}`, {
+        userEmail: window.localStorage.getItem("userEmail"),
+        newStatus: newStatus,
+      });
+
+      setTaskList((prevList) =>
+        prevList.map((task) =>
+          task.title === title ? { ...task, status: newStatus } : task
+        )
+      );
+
       successToast("Task successfully deleted.");
     } catch (error) {
       console.log(error);
@@ -47,7 +67,7 @@ const MyTasks = () => {
       >
         Add Task
       </button>
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-x-2 gap-y-4">
         <Search
           search={search}
           setSearch={setSearch}
@@ -64,7 +84,14 @@ const MyTasks = () => {
 
       {taskList.length !== 0 &&
         taskList.map((task, index) => {
-          return <Task task={task} key={index} handleDelete={handleDelete} />;
+          return (
+            <Task
+              task={task}
+              key={index}
+              handleUpdateStatus={handleUpdateStatus}
+              handleDelete={handleDelete}
+            />
+          );
         })}
     </div>
   );

@@ -1,5 +1,4 @@
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 import NavigateButton from "../utils/NavigateButton";
 import Profile from "./Profile";
 // import Wrapper from "../utils/Wrapper";
